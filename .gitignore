@@ -1,1 +1,5 @@
 CLAUDE.md
+
+# pycache
+tests/__pycache__/
+src/portpier/__pycache__/
