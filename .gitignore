@@ -5,3 +5,6 @@ tests/__pycache__/
 src/portpier/__pycache__/
 src/portpier/data/__pycache__/
 src/portpier/utils/__pycache__/
+src/portpier/ui/__pycache__/
+src/portpier/ui/widgets/__pycache__/
+src/portpier/ui/screens/__pycache__/
