@@ -5,7 +5,7 @@
 
 > [!NOTE]
 > **Early development.** The data layer and UI are being built phase by phase
-> (see [`CLAUDE.md`](./CLAUDE.md)). Right now the `portpier` command is a working
+> Right now the `portpier` command is a working
 > skeleton — `--version` and `--help` respond, but the TUI isn't wired up yet.
 > This README is the dev quickstart; the full user guide lands with v1.
 
