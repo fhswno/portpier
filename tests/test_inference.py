@@ -1,4 +1,4 @@
-"""Tests for utils/inference.py (CLAUDE.md §15)."""
+"""Tests for utils/inference.py."""
 
 from __future__ import annotations
 
