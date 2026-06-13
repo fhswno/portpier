@@ -2,7 +2,7 @@
 # Run `make` (or `make help`) to see everything available.
 
 .DEFAULT_GOAL := help
-.PHONY: help install run version typecheck lint fmt test check clean
+.PHONY: help install run version smoke typecheck lint fmt test check clean
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
@@ -16,6 +16,9 @@ run: ## Launch portpier
 
 version: ## Print the portpier version
 	uv run portpier --version
+
+smoke: ## Live data-layer check: collect real ports and print the first few
+	@uv run python -c "from portpier.data.collector import Collector; from portpier.utils.format import bytes_to_human as b, seconds_to_uptime as up; es = Collector().collect_ports(); print(f'{len(es)} sockets collected'); [print(f':{e.port:<6} {str(e.process_name):<16} {(e.process_type or chr(8212)):<14} {b(e.memory_rss_bytes):>9}  {up(e.uptime_seconds):>8}  {e.state}') for e in es[:10]]"
 
 typecheck: ## Run mypy --strict on src/
 	uv run mypy --strict src/
