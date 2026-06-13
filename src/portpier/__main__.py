@@ -31,9 +31,10 @@ def main() -> None:
     """CLI entry point. ``--version`` and ``--help`` exit during parsing."""
     parser = build_parser()
     parser.parse_args()
-    # Phase 0: nothing runs yet. A bare `portpier` invocation will launch the
-    # TUI once the application is implemented (Phase 2).
-    print("portpier: TUI not yet implemented (Phase 0 skeleton).")
+    # Imported lazily so `--version` / `--help` don't pay the Textual import cost.
+    from portpier.app import PortpierApp
+
+    PortpierApp().run()
 
 
 if __name__ == "__main__":
