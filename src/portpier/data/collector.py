@@ -1,12 +1,12 @@
 """psutil-backed collection of ports and process detail.
 
 The collector is a *class* (not free functions) so it can hold ``_process_cache``
-across refresh cycles without a module-level global (CLAUDE.md §0). ``PortpierApp``
+across refresh cycles without a module-level global. ``PortpierApp``
 owns a single instance.
 
 macOS strategy: iterate processes and ask each one for its connections, rather
 than calling the system-wide ``psutil.net_connections()`` — the latter does not
-reliably return PIDs without root on macOS. See CLAUDE.md §4.2 / §16.
+reliably return PIDs without root on macOS.
 """
 
 from __future__ import annotations
