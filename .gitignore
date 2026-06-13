@@ -3,3 +3,5 @@ CLAUDE.md
 # pycache
 tests/__pycache__/
 src/portpier/__pycache__/
+src/portpier/data/__pycache__/
+src/portpier/utils/__pycache__/
