@@ -29,6 +29,7 @@ class StatusHeader(Widget):
     total_memory: reactive[str] = reactive("0 B")
     theme_name: reactive[str] = reactive("dark")
     refresh_interval: reactive[float] = reactive(2.0)
+    pulsing: reactive[bool] = reactive(False)
 
     def render(self) -> RenderResult:
         tokens = TOKENS.get(self.theme_name, TOKENS["dark"])
@@ -41,8 +42,17 @@ class StatusHeader(Widget):
         line.append(_SEP)
         line.append(f"theme: {self.theme_name}")
         line.append(_SEP)
-        line.append(f"↻ {self._format_interval()}")
+        line.append("↻", style="reverse" if self.pulsing else "")
+        line.append(f" {self._format_interval()}")
         return line
+
+    def pulse(self) -> None:
+        """Briefly invert the ↻ glyph to signal a successful data refresh."""
+        self.pulsing = True
+        self.set_timer(0.25, self._end_pulse)
+
+    def _end_pulse(self) -> None:
+        self.pulsing = False
 
     def _format_interval(self) -> str:
         value = self.refresh_interval
