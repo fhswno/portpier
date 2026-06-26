@@ -30,6 +30,7 @@ class StatusHeader(Widget):
     theme_name: reactive[str] = reactive("dark")
     refresh_interval: reactive[float] = reactive(2.0)
     pulsing: reactive[bool] = reactive(False)
+    sudo_warning: reactive[bool] = reactive(False)
 
     def render(self) -> RenderResult:
         tokens = TOKENS.get(self.theme_name, TOKENS["dark"])
@@ -44,6 +45,9 @@ class StatusHeader(Widget):
         line.append(_SEP)
         line.append("↻", style="reverse" if self.pulsing else "")
         line.append(f" {self._format_interval()}")
+        if self.sudo_warning:
+            line.append(_SEP)
+            line.append("⚠ Some processes require sudo to inspect", style=tokens["danger"])
         return line
 
     def pulse(self) -> None:
