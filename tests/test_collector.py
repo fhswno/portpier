@@ -133,6 +133,29 @@ def test_no_such_process_is_skipped_gracefully(
     assert {e.port for e in entries} == {3000}  # no crash; dead process dropped
 
 
+def test_access_denied_sets_flag_and_skips(
+    patch_psutil: Callable[[Iterable[_FakeProc]], None],
+) -> None:
+    good = _FakeProc(_full_info(pid=1, name="node"), conns=[_conn(3000)])
+    # An other-user process whose connections we can't read (macOS without sudo).
+    denied = _FakeProc(_full_info(pid=9), conn_error=psutil.AccessDenied(9))
+    patch_psutil([denied, good])
+    collector = Collector()
+    entries = collector.collect_ports()
+    assert {e.port for e in entries} == {3000}  # denied process yields nothing
+    assert collector.access_denied is True  # surfaces the "sudo required" warning
+
+
+def test_no_access_denied_leaves_flag_false(
+    patch_psutil: Callable[[Iterable[_FakeProc]], None],
+) -> None:
+    proc = _FakeProc(_full_info(pid=1, name="node"), conns=[_conn(3000)])
+    patch_psutil([proc])
+    collector = Collector()
+    collector.collect_ports()
+    assert collector.access_denied is False
+
+
 def test_access_denied_yields_none_metadata_not_a_crash(
     patch_psutil: Callable[[Iterable[_FakeProc]], None],
 ) -> None:
