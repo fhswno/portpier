@@ -1,6 +1,7 @@
-"""Entry point for the portpier CLI.
+"""Entry point for the ``portpier`` CLI.
 
-Phase 0 skeleton: argument parsing only. The TUI is wired up in a later phase.
+``--version`` / ``--help`` are handled by argparse and exit before the TUI is
+imported; with no flags, the Textual dashboard is launched.
 """
 
 from __future__ import annotations
@@ -15,8 +16,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="portpier",
         description=(
-            "A gorgeous, keyboard-driven TUI dashboard for monitoring and "
-            "managing ports on macOS."
+            "A gorgeous, keyboard-driven TUI dashboard for monitoring and managing ports on macOS."
         ),
     )
     parser.add_argument(
