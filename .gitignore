@@ -1,5 +1,9 @@
 CLAUDE.md
 
+# build artifacts
+dist/
+build/
+
 # pycache
 tests/__pycache__/
 src/portpier/__pycache__/
