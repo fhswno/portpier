@@ -99,6 +99,10 @@ class Collector:
         # Persisted across cycles so cpu_percent() can diff against a prior
         # sample. Without this, every cycle is a "first call" and reads 0.0.
         self._process_cache: dict[int, psutil.Process] = {}
+        # Set on each scan: True if any process raised AccessDenied this cycle
+        # (i.e. other users' processes exist that we can't inspect without sudo).
+        # Read by the UI to toggle the "sudo required" header warning.
+        self.access_denied: bool = False
 
     # -- public API ----------------------------------------------------------
 
@@ -115,11 +119,19 @@ class Collector:
         entries: list[PortEntry] = []
         seen: set[tuple[str, str, int, str, str]] = set()
         live_pids: set[int] = set()
+        any_denied = False
 
         for proc in psutil.process_iter():
             try:
                 connections = proc.net_connections(kind="inet")
                 info = proc.as_dict(attrs=_PROC_ATTRS, ad_value=None)
+            except psutil.NoSuchProcess:
+                continue
+            except psutil.AccessDenied:
+                # Process owned by another user — we can't see its sockets.
+                # Surface this so the UI can show the "sudo required" warning.
+                any_denied = True
+                continue
             except psutil.Error:
                 continue
             if not connections:
@@ -161,6 +173,7 @@ class Collector:
                     live_pids.add(meta.pid)
 
         self._evict_stale(live_pids)
+        self.access_denied = any_denied
         return entries
 
     def collect_detail(self, pid: int, entry: PortEntry) -> DetailInfo:
