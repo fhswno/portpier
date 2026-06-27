@@ -69,7 +69,7 @@ class _FakeProc:
             raise self._conn_error
         return self._conns
 
-    def as_dict(self, attrs: list[str] | None = None, ad_value: Any = None) -> dict[str, Any]:
+    def as_dict(self, attrs: list[str] | None = None, ad_value: object = None) -> dict[str, Any]:
         return dict(self._info)
 
 
