@@ -1,11 +1,11 @@
 # portpier
 
-> A gorgeous, keyboard-driven TUI dashboard for monitoring and managing ports on macOS.
-> Built with Python + Textual + psutil. System ports (< 1024) are always hidden.
+> Lightweight TUI dashboard for monitoring and managing ports on macOS.
+> System ports (< 1024) are always hidden.
 
 `portpier` shows every active user-space socket (all states) with full process
 metadata, a live-updating table, one-keypress process termination, a rich detail
-view, and a command palette — all driven by `psutil` (no `lsof`/`netstat`).
+view, and a command palette.
 
 ---
 
