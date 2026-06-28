@@ -7,8 +7,14 @@ imported; with no flags, the Textual dashboard is launched.
 from __future__ import annotations
 
 import argparse
+from importlib.metadata import PackageNotFoundError, version
 
-__version__ = "0.1.0"
+# Single source of truth: the version lives in pyproject.toml and is read back
+# from the installed package metadata. Falls back if run from a bare checkout.
+try:
+    __version__ = version("portpier")
+except PackageNotFoundError:  # not installed (e.g. running from source without install)
+    __version__ = "0.0.0+unknown"
 
 
 def build_parser() -> argparse.ArgumentParser:

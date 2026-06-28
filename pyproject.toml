@@ -4,12 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "portpier"
-version = "0.1.0"
+version = "0.1.1git tag v0.1.1"
 description = "A gorgeous TUI dashboard for port and process monitoring on macOS"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11"
-authors = [{ name = "Dave Ohayon", email = "davidohn.uk@hotmail.com" }]
+authors = [{ name = "David Ohayon", email = "davidohn.uk@hotmail.com" }]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console :: Curses",
