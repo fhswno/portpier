@@ -9,18 +9,34 @@ view, and a command palette.
 
 ---
 
-## Prerequisites
-
-Just [**uv**](https://docs.astral.sh/uv/). It provisions the virtualenv *and* the
-Python version — no need to install Python 3.11+ yourself.
-
-```bash
-brew install uv
-```
-
 ## Install
 
-Run it from the checkout, or install it globally on your PATH:
+**macOS (Homebrew):**
+
+```bash
+brew install fhswno/portpier/portpier
+```
+
+**Or run it instantly without installing** (needs [uv](https://docs.astral.sh/uv/)):
+
+```bash
+uvx portpier
+```
+
+**Other Python installers:**
+
+```bash
+uv tool install portpier
+pipx install portpier
+```
+
+> Requires Python ≥ 3.11. macOS is the primary target; Linux works too.
+> System ports (< 1024) are always hidden.
+
+### From source (development)
+
+[uv](https://docs.astral.sh/uv/) provisions the virtualenv *and* the Python
+version — no need to install Python yourself.
 
 ```bash
 # From the project root:
