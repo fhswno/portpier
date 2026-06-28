@@ -1,9 +1,5 @@
 name: publish
 
-# On a `v*` tag: lint + typecheck + test, build, publish to PyPI via Trusted
-# Publishing (OIDC), then cut a GitHub Release with auto-generated notes.
-# Manual dispatch (`workflow_dispatch`) runs only the checks (no publish) —
-# handy for testing CI on a branch.
 on:
   push:
     tags:
@@ -30,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
-      id-token: write # OIDC Trusted Publishing — no API token needed.
+      id-token: write
     steps:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v8
