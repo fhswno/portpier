@@ -7,6 +7,8 @@
 metadata, a live-updating table, one-keypress process termination, a rich detail
 view, and a command palette.
 
+<img width="3006" height="1886" alt="image" src="https://github.com/user-attachments/assets/a258ac42-5007-4acb-9ca5-190221e7ea4a" />
+
 ---
 
 ## Install
@@ -91,6 +93,8 @@ name, type, state, and PID. The status bar shows the live match count.
 ---
 
 ## Command palette (`Ctrl+P`)
+
+<img width="3006" height="1886" alt="image" src="https://github.com/user-attachments/assets/85c19979-224a-4b90-bab7-c85bb611d8ab" />
 
 | Command | Action |
 |---|---|
